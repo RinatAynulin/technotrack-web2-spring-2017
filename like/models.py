@@ -5,9 +5,10 @@ from django.contrib.contenttypes.models import ContentType
 from django.db import models
 
 from core.models import Named, Authored
+from event.models import Eventable
 
 
-class Like(Authored):
+class Like(Authored, Eventable):
     target_content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
     target_id = models.PositiveIntegerField()
     target = GenericForeignKey('target_content_type', 'target_id')
@@ -19,6 +20,12 @@ class Like(Authored):
 
     def __unicode__(self):
         return 'Like by {}'.format(self.author)
+
+    def get_description(self):
+        return '{} has liked {}'.format(self.author, self.target)
+
+    def get_author(self):
+        return self.author
 
 
 class Likeable(models.Model):
