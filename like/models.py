@@ -21,7 +21,7 @@ class Like(Authored):
         return 'Like by {}'.format(self.author)
 
 
-class LikeAble(models.Model):
+class Likeable(models.Model):
     likes = GenericRelation(
         Like,
         content_type_field='target_content_type',
