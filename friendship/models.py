@@ -6,7 +6,7 @@ from core.models import User
 from event.models import Eventable
 
 
-class Friendship(Eventable):
+class FriendshipRequest(Eventable):
     sender = models.ForeignKey(User, blank=False, related_name='sender')
     receiver = models.ForeignKey(User, blank=False, related_name='receiver')
     approved = models.BooleanField(default=False)
@@ -17,8 +17,17 @@ class Friendship(Eventable):
     def get_author(self):
         return self.sender
 
+    class Meta:
+        verbose_name = u'friendship request'
+        verbose_name_plural = u'friendship requests'
 
-class Friends(models.Model):
+
+class Friendship(models.Model):
     first_user = models.ForeignKey(User, blank=False, related_name='first_user')
     second_user = models.ForeignKey(User, blank=False, related_name='second_user')
+
+    class Meta:
+        verbose_name = u'friendship'
+        verbose_name_plural = u'friendships'
+
 
