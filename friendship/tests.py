@@ -9,7 +9,7 @@ class TestFriend(TestCase):
         self.first_user = get_user_model().objects.create(username="test_user_1", email="test1@mail.ru")
         self.second_user = get_user_model().objects.create(username="test_user_2", email="test2@mail.ru")
 
-    def testFriendshipRequestApproved(self):
+    def test_friendship_request_approve_work(self):
         friendship_request = FriendshipRequest.objects.create(sender=self.first_user, receiver=self.second_user,
                                                               approved=True)
         assert Friendship.objects.count() == 2

@@ -13,7 +13,7 @@ class TestPost(TestCase):
     def tearDown(self):
         pass
 
-    def testPostWasAddedToEvents(self):
+    def test_post_adds_to_events(self):
         events_count_before = Event.objects.count()
         post = Post.objects.create(author=self.user, content='test')
         events_count_after = Event.objects.count()
